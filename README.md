@@ -1,7 +1,8 @@
 # Automated Lunar Crater Detection and Classification
 
-**AA 310 — Satellite Imaging Project**  
-**Dhriti Jha · Nandini Kumari**  
+**AA 310 — Satellite Imaging**  
+**Dhriti Jha** and
+**Nandini Kumari**  
 **April 2026**
 
 A computer-vision pipeline for detecting and classifying lunar craters from **Chandrayaan-2 OHRC imagery** using YOLO. The project also explores metadata-driven crater depth estimation from shadow geometry.
@@ -22,6 +23,39 @@ The final system:
 - Evaluates performance on an unseen test set
 - Uses OHRC metadata and shadow geometry to estimate crater depth
 - Produces structured JSON output containing crater detections and derived measurements
+
+---
+
+## Visualisation
+Each crater is assigned a unique crater_id, and the information associated with each crater is stored as an object within the craters array of the corresponding JSON object.
+<img width="1243" height="661" alt="image" src="https://github.com/user-attachments/assets/62fceb6b-9837-4e2c-8ba8-78cc90c9a5b4" />
+
+---
+
+## End-to-End Output
+
+The full pipeline combines YOLO detections with metadata-driven measurements and writes structured JSON output.
+
+Example:
+
+```json
+{
+  "image": "example.png",
+  "craters": [
+    {
+      "crater_id": 0,
+      "bbox": [183, 203, 271, 287],
+      "label": "crater_large",
+      "class_id": 2,
+      "confidence": 0.8397,
+      "depth_m": 1.9388,
+      "depth_class": "deep",
+      "diameter_m": 20.24,
+      "d_by_D": 0.0958
+    }
+  ]
+}
+```
 
 ---
 
@@ -272,34 +306,6 @@ d / D
 
 where `D` is estimated crater diameter.
 
----
-
-## End-to-End Output
-
-The full pipeline combines YOLO detections with metadata-driven measurements and writes structured JSON output.
-
-Example:
-
-```json
-{
-  "image": "example.png",
-  "craters": [
-    {
-      "crater_id": 0,
-      "bbox": [183, 203, 271, 287],
-      "label": "crater_large",
-      "class_id": 2,
-      "confidence": 0.8397,
-      "depth_m": 1.9388,
-      "depth_class": "deep",
-      "diameter_m": 20.24,
-      "d_by_D": 0.0958
-    }
-  ]
-}
-```
-
-The inference pipeline also creates a visualization comparing the original image with the detected crater bounding boxes.
 
 ---
 
@@ -417,11 +423,11 @@ Potential improvements include:
 
 ## Authors
 
-**Nandini Kumari**  
-Model training · Manual labeling · Report writing
-
 **Dhriti Jha**  
 Research · Model training · Manual labeling · Depth estimation · Presentation
+
+**Nandini Kumari**  
+Model training · Manual labeling · Report writing
 
 ---
 
